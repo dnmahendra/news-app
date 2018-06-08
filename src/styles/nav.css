@@ -1,0 +1,28 @@
+.menu-container {
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  background-color: #5995DA;
+  padding: 20px 0;
+}
+
+.menu {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.links {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.add-link {
+  color: #fff;
+  margin-left: 10px;
+}
+
+.home-link {
+  color: #fff;
+}

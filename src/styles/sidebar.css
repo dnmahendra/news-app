@@ -1,0 +1,27 @@
+.category-list {
+  display: flex;
+  flex-direction: column;
+  color: #5995DA;
+  justify-content: space-around;
+}
+
+.category-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.category-content {
+  flex-basis: 75%;
+}
+
+.category-count {
+  display: flex;
+  align-content: center;
+}
+
+.add-icon {
+  flex-basis: 25%;
+  font-size: 10px;
+  align-self: center;
+}

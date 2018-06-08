@@ -1,0 +1,26 @@
+.news-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar {
+  margin: 0;
+  flex: 1;
+  background-color: #D6E9FE;
+}
+
+.main {
+  margin: 0;
+  flex: 4;
+  background-color: #BCF1FF;
+}
+
+.article-section {
+  display: flex;
+  flex-direction: row;
+}
+
+.article-image {
+  width: 10%;
+  height: 25%;
+}
