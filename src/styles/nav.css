@@ -2,8 +2,11 @@
   display: flex;
   justify-content: center;
   color: #fff;
-  background-color: #5995DA;
+  background-color: #62738E;
   padding: 20px 0;
+  border-style: solid;
+  border-color: #fff;
+  border-width: 2px 3px 2px 3px;
 }
 
 .menu {

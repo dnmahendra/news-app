@@ -1,0 +1,43 @@
+.form-container {
+  margin: 0 auto;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+input, select, textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 20px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.25em;
+  font-size: 16px;
+}
+
+.text-area {
+  height: 100px;
+}
+
+.select-input {
+  height: 40px;
+}
+
+.input, .select-input, .text-area {
+  padding: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightgray;
+  background-color: white;
+  font-size: 18px;
+}
+
+.input:focus {
+  border-color: gray;
+}

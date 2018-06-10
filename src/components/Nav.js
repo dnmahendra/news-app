@@ -13,7 +13,7 @@ export default function Nav () {
           <NavLink className="home-link" to='/' exact activeClassName='active'>
             Home
           </NavLink>
-          <NavLink className="add-link" to='/add' activeClassName='active'>
+          <NavLink className="add-link" to='/add-news' activeClassName='active'>
             Add News
           </NavLink>
         </div>

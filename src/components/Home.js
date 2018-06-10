@@ -1,32 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import Sidebar from './Sidebar'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPenSquare } from '@fortawesome/free-solid-svg-icons'
+import NewsList from './NewsList'
+import queryString from 'query-string'
 import '../styles/home.css'
 
 class Home extends Component {
   render() {
-    const { newsList, totals } = this.props
-
-    let renderNewsList
-    if (newsList) {
-      renderNewsList = newsList.map((item) => {
-        return (
-          <div key={item.key}>
-            <Link to={`news/${item.key}`}>
-              <p>{item.title}</p>
-              <div className="article-section">
-                <img className="article-image" src={item.urlToImage} alt="article"></img>
-                <p>{item.description}</p>
-                <FontAwesomeIcon icon={faPenSquare} size='2x' />
-              </div>
-            </Link>
-          </div>
-        )
-      })
-    }
+    const { newsList, totals, listCount } = this.props
 
     return (
       <div className="news-container">
@@ -34,19 +15,31 @@ class Home extends Component {
           <Sidebar categories={totals}/>
         </div>
         <div className="main">
-          <div className="news-list">
-            {renderNewsList}
-          </div>
+          <NewsList newsList={newsList} listCount={listCount} />
         </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  const totals = state.news.totals
+  let listCount = 0
+  Object.keys(totals).forEach((key) => {
+    listCount = listCount + totals[key]
+  })
+  const params = queryString.parse(ownProps.location.search)
+
+  let newsList
+  if (params.category) {
+    newsList = state.news.newsList.filter((item) => item.category === params.category)
+  } else {
+    newsList = state.news.newsList
+  }
   return {
-    newsList: state.news.newsList,
-    totals: state.news.totals
+    newsList,
+    totals,
+    listCount
   }
 }
 

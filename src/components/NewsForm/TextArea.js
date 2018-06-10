@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 
-class TextInput extends Component {
+class TextArea extends Component {
   render () {
     const { input, label, type } = this.props
 
     return (
       <div>
         <label className='label'>{label}</label>
-        <input
+        <textarea
           value={input.value}
           onChange={input.onChange}
           name={input.name}
-          className='input'
+          className='text-area'
           onBlur={input.onBlur}
           onFocus={input.onFocus}
           type={type}
@@ -21,8 +21,8 @@ class TextInput extends Component {
   }
 }
 
-TextInput.propTypes = {
+TextArea.propTypes = {
 
 }
 
-export default TextInput
+export default TextArea

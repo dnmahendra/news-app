@@ -35,7 +35,7 @@ function loadData (index) {
       Promise.all(promises).then((data) => {
         console.log('finished loading data')
       })
-      const totalsRef = db.ref('news/totals')
+      const totalsRef = db.ref('totals')
 
       const totals = articles.reduce((tally, item) => {
         tally[item.category] = tally[item.category] ? tally[item.category] + 1 : 1

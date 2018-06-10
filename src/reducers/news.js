@@ -1,20 +1,46 @@
 import {
   ADD_NEWS,
-  EDIT_NEWS
+  EDIT_NEWS,
+  RECEIVE_MORE_NEWS
 } from '../actions/news'
+import update from 'react-addons-update'
 
 import {
   RECEIVE_DATA
 } from '../actions/shared'
 
-export default function news (state = [], action) {
+const initialState = {newsList: [], totals: {}, startAt: 0}
+
+export default function news (state = initialState, action) {
   switch(action.type) {
-    case ADD_NEWS :
-      return state.concat([action.news])
-    case EDIT_NEWS :
-      return state.filter((news) => news.id !== action.id)
-    case RECEIVE_DATA :
+    case ADD_NEWS:
+      return update(
+        state, {
+          newsList: {$push: [action.news.article]},
+          totals: {$set: {[`${action.news.article.category}`]: action.news.categoryCount}}
+      })
+    case EDIT_NEWS:
+      const newData = state.newsList.map((item) => {
+        if (item.key === action.key) {
+          return action.news
+        } else {
+          return item
+        }
+      })
+
+      return update(
+        state, {
+          newsList: {$set: newData}
+        }
+      )
+    case RECEIVE_DATA:
       return action.news
+    case RECEIVE_MORE_NEWS:
+      return update(
+        state, {
+          newsList: {$push: action.news.newsList},
+          startAt: {$set: action.news.startAt}
+      })
     default :
       return state
   }

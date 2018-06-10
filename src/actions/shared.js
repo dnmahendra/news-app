@@ -11,15 +11,13 @@ function receiveData (news) {
   }
 }
 
-export function fetchNewsData (start = 0, limit = 10) {
+export function fetchNewsData () {
   return async (dispatch) => {
     dispatch(showLoading())
-    if (start > 0) {
-      start = start * limit + 1
-    }
+
     const newsRef = fire.database().ref('news')
-    const data = await newsRef.orderByChild('publishedAt').startAt(start).limitToFirst(limit).once('value')
-    const totalsRef = fire.database().ref('news/totals')
+    const data = await newsRef.orderByChild('publishedAt').once('value')
+    const totalsRef = fire.database().ref('totals')
     const totalsData = await totalsRef.once('value')
 
     let totals = {}
@@ -34,7 +32,7 @@ export function fetchNewsData (start = 0, limit = 10) {
     })
     const news = {
       newsList,
-      totals
+      totals,
     }
     dispatch(receiveData(news))
     dispatch(hideLoading())

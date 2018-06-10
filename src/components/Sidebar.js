@@ -1,7 +1,8 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
 import '../styles/sidebar.css'
 
 class Sidebar extends Component {
@@ -12,13 +13,17 @@ class Sidebar extends Component {
     if (categories) {
       renderList = Object.keys(categories).map((category) => {
         return (
-          <div className="category-group">
+          <div className="category-group" key={category}>
             <div className="category-content" key={category}>
-              <div className="category-name">{category}</div>
-              <div classname="category-count">{categories[category]}</div>
+              <Link to={`/?category=${category}`}>
+                <div className="category-name">{category}</div>
+                <div className="category-count">{categories[category]} News</div>
+              </Link>
             </div>
             <div className="add-icon">
-              <FontAwesomeIcon icon={faPlusCircle} size='2x' />
+              <Link className="link-icon" to={`/add-news?category=${category}`}>
+                <FontAwesomeIcon icon={faPlusCircle} size='2x' />
+              </Link>
             </div>
           </div>
         )

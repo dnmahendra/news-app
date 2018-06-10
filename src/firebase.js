@@ -1,7 +1,7 @@
 const firebase = require('firebase')
 
 const config = {
-  apiKey: "AIzaSyA_boJTqIOu9IvIvrW3T-OkUw5gpPXs3oI",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "news-ccb16.firebaseapp.com",
   databaseURL: "https://news-ccb16.firebaseio.com",
   projectId: "news-ccb16",
