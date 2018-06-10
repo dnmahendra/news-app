@@ -1,5 +1,7 @@
  # News App
 
+  You can see the full working app here - https://your-daily-news.herokuapp.com/
+
  ## App structure
  ```
   news-app
@@ -24,9 +26,6 @@
       └── styles
   ```
 
- ## Pre-requisites
-  - `node version 8.9.4`
-
  ## How to Start the app
  ```
   npm install
@@ -37,3 +36,9 @@
  ```
   npm i --save firebase --force
  ```
+
+ ## Details
+
+  - Built the app using create react app, follow this link for more details - https://github.com/facebook/create-react-app
+  - Backend is on firebase
+  - ask the admin for the `apiKey`
