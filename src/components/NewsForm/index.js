@@ -93,7 +93,7 @@ const mapStateToProps = (state, ownProps) => {
     publishDate: ''
   }
   if (/add-news/.test(ownProps.match.path)) {
-    const params = qs.parse(ownProps.location.search)
+    const params = qs.parse(ownProps.location.search.replace(/^\?/, ''))
 
     if (params.category) {
       initialValues = merge(initialValues, {newsCategory: params.category})

@@ -28,7 +28,8 @@ const mapStateToProps = (state, ownProps) => {
   Object.keys(totals).forEach((key) => {
     listCount = listCount + totals[key]
   })
-  const params = qs.parse(ownProps.location.search)
+
+  const params = qs.parse(ownProps.location.search.replace(/^\?/, ''))
 
   let newsList
   if (params.category) {
