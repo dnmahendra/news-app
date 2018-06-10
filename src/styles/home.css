@@ -31,7 +31,7 @@
 }
 
 .news-list .article {
-  box-shadow: 0 3px 10px rgba(40,63,69,.06);
+  box-shadow: 5px 10px 30px #EAEAEF;
   border: 1px solid #F3F5F7;
   border-radius: 4px;
   margin-bottom: 10px;

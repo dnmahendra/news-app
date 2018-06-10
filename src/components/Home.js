@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Sidebar from './Sidebar'
 import NewsList from './NewsList'
-import queryString from 'query-string'
+import qs from 'qs'
 import '../styles/home.css'
 
 class Home extends Component {
@@ -28,7 +28,7 @@ const mapStateToProps = (state, ownProps) => {
   Object.keys(totals).forEach((key) => {
     listCount = listCount + totals[key]
   })
-  const params = queryString.parse(ownProps.location.search)
+  const params = qs.parse(ownProps.location.search)
 
   let newsList
   if (params.category) {

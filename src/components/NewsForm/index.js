@@ -6,7 +6,7 @@ import TextArea from './TextArea'
 import { Field, reduxForm } from 'redux-form'
 import { handleAddNews, handleEditNews } from '../../actions/news'
 import { Redirect } from 'react-router-dom'
-import queryString from 'query-string'
+import qs from 'qs'
 import merge from 'lodash/merge'
 import '../../styles/form.css'
 
@@ -93,7 +93,7 @@ const mapStateToProps = (state, ownProps) => {
     publishDate: ''
   }
   if (/add-news/.test(ownProps.match.path)) {
-    const params = queryString.parse(ownProps.location.search)
+    const params = qs.parse(ownProps.location.search)
 
     if (params.category) {
       initialValues = merge(initialValues, {newsCategory: params.category})

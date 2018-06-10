@@ -24,6 +24,9 @@
       └── styles
   ```
 
+ ## Pre-requisites
+  - `node version 8.9.4`
+
  ## How to Start the app
  ```
   npm install
