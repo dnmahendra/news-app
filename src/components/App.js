@@ -1,18 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import LoadingBar from 'react-redux-loading'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Nav from './Nav'
 import Home from './Home'
 import NewsForm from './NewsForm'
-import { fetchNewsData } from '../actions/shared'
+import LoadingBar from 'react-redux-loading'
 
 class App extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props
-
-    dispatch(fetchNewsData())
-  }
   render() {
     const { loading } = this.props
 
@@ -25,9 +19,12 @@ class App extends Component {
             {loading === true
               ? null
               : <Fragment>
+                <Switch>
                   <Route path='/' exact component={Home} />
+                  <Route path='/category/:category' component={Home} />
                   <Route path='/add-news' component={NewsForm} />
                   <Route path="/edit-news/:key" component={NewsForm} />
+                </Switch>
                 </Fragment>}
           </div>
         </Fragment>

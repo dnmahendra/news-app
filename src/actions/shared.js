@@ -4,7 +4,7 @@ import merge from 'lodash/merge'
 
 export const RECEIVE_DATA = 'RECEIVE_DATA'
 
-function receiveData (news) {
+export function receiveData (news) {
   return {
     type: RECEIVE_DATA,
     news
@@ -16,7 +16,7 @@ export function fetchNewsData () {
     dispatch(showLoading())
 
     const newsRef = fire.database().ref('news')
-    const data = await newsRef.orderByChild('publishedAt').once('value')
+    const data = await newsRef.orderByChild('publishedAt').limitToFirst(10).once('value')
     const totalsRef = fire.database().ref('totals')
     const totalsData = await totalsRef.once('value')
 
@@ -33,6 +33,7 @@ export function fetchNewsData () {
     const news = {
       newsList,
       totals,
+      limit: 10,
     }
     dispatch(receiveData(news))
     dispatch(hideLoading())

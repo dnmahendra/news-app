@@ -38,8 +38,8 @@ export default function news (state = initialState, action) {
     case RECEIVE_MORE_NEWS:
       return update(
         state, {
-          newsList: {$push: action.news.newsList},
-          startAt: {$set: action.news.startAt}
+          newsList: {$set: action.news.newsList},
+          limit: {$set: action.news.limit}
       })
     default :
       return state

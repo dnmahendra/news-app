@@ -1,6 +1,9 @@
 import fire from '../firebase'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import merge from 'lodash/merge'
+import {
+  receiveData
+} from './shared'
 
 export const ADD_NEWS = 'ADD_NEWS'
 export const EDIT_NEWS = 'EDIT_NEWS'
@@ -85,14 +88,17 @@ export function receiveMoreNews (news) {
   }
 }
 
-export function fetchMoreNews (startAt = 0, limit = 10) {
+export function fetchMoreNews (limit = 10, category) {
   return async (dispatch) => {
     dispatch(showLoading())
-    if (startAt > 0) {
-      startAt = startAt * limit + 1
-    }
     const newsRef = fire.database().ref('news')
-    const data = await newsRef.orderByKey().startAt(startAt).limitToFirst(limit).once('value')
+    let data
+    limit = limit + 10
+    if (category) {
+      data = await newsRef.orderByChild('category').equalTo(category).limitToFirst(limit).once('value')
+    } else {
+      data = await newsRef.orderByChild('publishedAt').limitToFirst(limit).once('value')
+    }
 
     let newsList = []
     data.forEach((item) => {
@@ -102,10 +108,39 @@ export function fetchMoreNews (startAt = 0, limit = 10) {
     })
     const news = {
       newsList,
-      startAt
+      limit,
     }
 
     dispatch(receiveMoreNews(news))
+    dispatch(hideLoading())
+  }
+}
+
+export function fetchNewsByCategory (category) {
+  return async (dispatch) => {
+    dispatch(showLoading())
+    const newsRef = fire.database().ref('news')
+    const data = await newsRef.orderByChild('category').equalTo(category).limitToFirst(10).once('value')
+    const totalsRef = fire.database().ref('totals')
+    const totalsData = await totalsRef.once('value')
+
+    let totals = {}
+    totalsData.forEach((item) => {
+      totals = item.val()
+    })
+    let newsList = []
+    data.forEach((item) => {
+      newsList.push(
+        merge(item.val(), {key: item.key})
+      )
+    })
+    const news = {
+      newsList,
+      totals,
+      limit: 10,
+    }
+
+    dispatch(receiveData(news))
     dispatch(hideLoading())
   }
 }

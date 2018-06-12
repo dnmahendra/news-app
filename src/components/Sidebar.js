@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import '../styles/sidebar.css'
 
 class Sidebar extends Component {
@@ -15,7 +16,7 @@ class Sidebar extends Component {
         return (
           <div className="category-group" key={category}>
             <div className="category-content" key={category}>
-              <Link to={`/?category=${category}`}>
+              <Link to={`/category/${category}`}>
                 <div className="category-name">{category}</div>
                 <div className="category-count">{categories[category]} News</div>
               </Link>
@@ -41,4 +42,4 @@ Sidebar.propTypes = {
   categories: PropTypes.object,
 }
 
-export default Sidebar
+export default connect(null)(withRouter(Sidebar))
